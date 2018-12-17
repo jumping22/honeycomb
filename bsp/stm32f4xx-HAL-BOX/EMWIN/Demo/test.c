@@ -3931,13 +3931,12 @@ void dwq_task(void) {
 			GUI_AA_SetFactor(MAG);//抗锯齿功能等级 4;
 	}
 	flag = 1;
-//	while(1)
-//	{
+
 		value = Dial_value_get();
 		i = 135 + 0.35*value;
 		fandraw(i);
 		GUI_Delay(10);
-//	}
+
 }
 
 #define BLACKCOLOR GUI_BLUE
@@ -3947,12 +3946,11 @@ void Traffic_light(uint8_t a,uint8_t b,uint8_t c)
 	
 	if(traffic_flag == 0)
 	{
-	GUI_Init();
-	
-	GUI_SetBkColor(GUI_WHITE);  
-	GUI_Clear();
-	GUI_SetColor(BLACKCOLOR);
-	GUI_FillRoundedRect(30, 80, 209, 160, 10);
+		GUI_Init();
+		GUI_SetBkColor(GUI_WHITE);  
+		GUI_Clear();
+		GUI_SetColor(GUI_BLUE);
+		GUI_FillRoundedRect(30, 80, 209, 160, 10);
 	}
 	
 	traffic_flag = 1;

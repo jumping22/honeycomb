@@ -814,7 +814,7 @@ static void thread_emwin_entry(void* parameter)
 }
 
 //extern void MainTask(void);
-
+uint8_t temp = 0;
 int main(void)
 {
 	
@@ -870,8 +870,8 @@ int main(void)
 		TIM3_PWM_Init(500-1,84-1);//2-5KHZ  FMQ  500--200
 		TIM4_PWM_Init(500-1,84-1);//MADA
 		
-		Init_MAX7219(); //点阵屏左初始化		
-		Init_DZP1();//点阵屏右初始化
+//		Init_MAX7219(); //点阵屏左初始化		
+//		Init_DZP1();//点阵屏右初始化
 		
 		MX_ADC1_Init();
 		YG_KEY_gpio_init();
@@ -899,13 +899,14 @@ int main(void)
 		MQ_CON_init();
 		//HAL_GPIO_WritePin(GPIOF,GPIO_PIN_3,GPIO_PIN_SET);//酒精传感器电源控制端
 		
-				proto_init();
+			//TIM_SetTIM4Compare1(300);
+		
+		proto_init();
 
 		rt_thread_idle_sethook(idle_hook_function);
 		
 		multi_button_test();
 		
-
 //创建线程1	
 	rt_err_t result = rt_thread_init(&thread_sensor, "thread_sensor", thread_sensor_entry, RT_NULL, &thread_sensor_stack[0], sizeof(thread_sensor_stack), 5, 10);
 	if (result == RT_EOK)
@@ -920,7 +921,7 @@ int main(void)
 //max7219_test();
 	while(1)
 	{
-			
+			temp = HAL_GPIO_ReadPin(GPIOF,GPIO_PIN_8);
 			SMG_show(value89);
 			rt_thread_delay(10);
 

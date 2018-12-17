@@ -380,8 +380,9 @@ int Proto_sensor_cmd_deal(void)
 		
 		
 		case GDKG: {
-
-			_data[0] = HAL_GPIO_ReadPin(GPIOF,GPIO_PIN_8);
+			uint8_t value = 0;
+			value = HAL_GPIO_ReadPin(GPIOF,GPIO_PIN_8);
+			_data[0] = value;
 			sendlength = 1;
 		}break;
 		
@@ -464,9 +465,8 @@ void DZP1_set(uint8_t *data)
 void DZP1_deal(void)
 {
 	if (dzp1_flag == 1) {
-		
-		dzp1_flag = 0;
-		Init_DZP1();
+		  dzp1_flag = 0;
+		  Init_DZP1();
 			Write_DZP1(1,dzp1_buf[0]<<1);
 			Write_DZP1(2,dzp1_buf[1]<<1);
 			Write_DZP1(3,dzp1_buf[2]<<1);
@@ -632,7 +632,7 @@ void SOUNDSENSOR_deal(void)
 		sound = Get_Adc1(SY_ADC_CH);
 	}
 }
-
+static uint8_t Clear_flag = 0;
 static uint8_t r = 0;
 static uint8_t yellow = 0;
 static uint8_t g = 0;;
@@ -648,10 +648,21 @@ void traffic_light_set(uint8_t color_r,uint8_t color_y,uint8_t color_g)
 
 void traffic_deal(void)
 {
+	
+	
 	if(traffic_light_flag == 1)
 	{
-	Traffic_light(r,yellow,g);
-	traffic_light_flag = 0;
+			if(Clear_flag == 1)
+		{
+			Clear_flag = 0;
+			GUI_SetBkColor(GUI_WHITE);  
+			GUI_Clear();
+			GUI_SetColor(GUI_BLUE);
+			GUI_FillRoundedRect(30, 80, 209, 160, 10);
+		}
+		
+		Traffic_light(r,yellow,g);
+		traffic_light_flag = 0;
 	}
 }
 
@@ -660,6 +671,7 @@ static uint8_t GUI_flag = 0;
 void GUI_set(void)
 {
 	GUI_flag = 1;
+	Clear_flag = 1;
 }
 
 void GUI_deal(void)
@@ -667,6 +679,7 @@ void GUI_deal(void)
 	if(GUI_flag == 1)
 	{
 		GUI_Init();
+		GUI_SetBkColor(GUI_BLACK); 
 		GUI_Clear();
 		GUI_flag = 0;
 	}
