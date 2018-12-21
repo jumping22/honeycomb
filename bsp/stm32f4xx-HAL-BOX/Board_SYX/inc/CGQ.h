@@ -11,7 +11,7 @@ void XZDWQ_init(void);
 void MQ_CON_init(void);
 void GZ_init(void);
 void GD_init(void);
-void mada_gpio_init(void);
+void VCC_Enable_init(void);
 
 #endif
 

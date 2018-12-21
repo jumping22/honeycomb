@@ -296,6 +296,9 @@ void LCD_show_image(void) //œ‘ æ240*240Õº∆¨
 	ref=0;		
 }
 
+
+
+/*
 void LCD_show_char(uint8_t x,uint8_t y,uint16_t color,uint8_t size,uint8_t data)
 {
 	uint8_t temp,t,pos;
@@ -527,7 +530,7 @@ void LCD_show_hanzi(unsigned int x,unsigned int y,unsigned char index)
 	 }
 }
 
-
+*/
 void LCD_Pin_Conf(void)
 {
 	  

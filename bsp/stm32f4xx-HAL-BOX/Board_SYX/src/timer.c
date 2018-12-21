@@ -55,7 +55,7 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
 	__HAL_RCC_TIM3_CLK_ENABLE();			//使能定时器3
 	__HAL_RCC_GPIOC_CLK_ENABLE();			//开启GPIOC时钟
 	
-		__HAL_RCC_TIM4_CLK_ENABLE();			//使能定时器4
+	__HAL_RCC_TIM4_CLK_ENABLE();			//使能定时器4
 	__HAL_RCC_GPIOD_CLK_ENABLE();			//开启GPIOD时钟
 	
 	GPIO_Initure.Pin=GPIO_PIN_6;           	//PC6

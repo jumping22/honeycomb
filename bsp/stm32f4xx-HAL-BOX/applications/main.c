@@ -817,17 +817,13 @@ static void thread_emwin_entry(void* parameter)
 uint8_t temp = 0;
 int main(void)
 {
-	
-//	uint8_t data[7];
-//	uint8_t *p=data;
-	
 	__HAL_RCC_CRC_CLK_ENABLE();
 	
 	MX_ADC3_Init();
 	
-//	while(Get_Adc3(ADC_CHANNEL_8)>200) ;//开机
+	while(Get_Adc3(ADC_CHANNEL_8)>200) ;//开机
 	
-//	HAL_Init();
+	HAL_Init();
 	//rt_pin_mode(44, PIN_MODE_INPUT); 
 	rt_pin_mode(74, PIN_MODE_OUTPUT);
 	//if (rt_pin_read(44) == PIN_HIGH)
@@ -857,50 +853,42 @@ int main(void)
 
 		
 
-
+		VCC_Enable_init();//32u4供电管脚初始化
 		HAL_GPIO_WritePin(GPIOA,GPIO_PIN_8,GPIO_PIN_SET);	
 		
 		//StandbyMode_Measure();
-		
-
-		
+	
 		Light_Pin_Init();//rgb灯初始化
-
-			
-		TIM3_PWM_Init(500-1,84-1);//2-5KHZ  FMQ  500--200
-		TIM4_PWM_Init(500-1,84-1);//MADA
+		TIM3_PWM_Init(500-1,84-1);//2-5KHZ  FMQ  500--200蜂鸣器初始化
+		TIM4_PWM_Init(500-1,84-1);//MADA初始化
 		
-//		Init_MAX7219(); //点阵屏左初始化		
+//		Init_MAX7219();//点阵屏左初始化		
 //		Init_DZP1();//点阵屏右初始化
 		
-		MX_ADC1_Init();
-		YG_KEY_gpio_init();
-
-		Sound_init();
-		DS18B20_Init();
+		MX_ADC1_Init();//
+		YG_KEY_gpio_init();//摇杆按键初始化
+		Sound_init();//声音模块初始化
+		DS18B20_Init();//温度传感器初始化
 		//MX_ADC3_Init();
 
-		SMG_init();
-		DHT11_Init();
-		
-		RTHW_init();
-		sw5_key_init();
-		LIGHT_init();
+		SMG_init();//数码管初始化
+		DHT11_Init();//温湿度初始化
+		RTHW_init();//人体红外初始化
+		sw5_key_init();//五向按键初始化
+		LIGHT_init();//光敏电阻初始化
 		LCD_Pin_Conf();		//lcd io口初始化
-		MX_SPI2_Init();
-	  HAL_GPIO_WritePin(GPIOB,GPIO_PIN_12,GPIO_PIN_RESET);
-	  Lcd_Init();
-		Lcd_Clear(WHITE);
-		LCD_show_image();
-		mada_gpio_init();
-		GD_init();
-		GZ_init();
+		MX_SPI2_Init();//LCD spi初始化
+	  HAL_GPIO_WritePin(GPIOB,GPIO_PIN_12,GPIO_PIN_RESET);//LCD片选脚拉低
+	  Lcd_Init();//LCD初始化
+		Lcd_Clear(WHITE);//LCD清屏
+		LCD_show_image();//蓝宙logo显示
+		GD_init();//光电开关初始化
+		GZ_init();//滚珠开关初始化
 		
-		MQ_CON_init();
-		//HAL_GPIO_WritePin(GPIOF,GPIO_PIN_3,GPIO_PIN_SET);//酒精传感器电源控制端
+		MQ_CON_init();//酒精控制管脚初始化
+		//HAL_GPIO_WritePin(GPIOF,GPIO_PIN_3,GPIO_PIN_SET);//酒精传感器电源控制端，在调度时使用
 		
-			//TIM_SetTIM4Compare1(300);
-		
+	
 		proto_init();
 
 		rt_thread_idle_sethook(idle_hook_function);
@@ -921,7 +909,7 @@ int main(void)
 //max7219_test();
 	while(1)
 	{
-			temp = HAL_GPIO_ReadPin(GPIOF,GPIO_PIN_8);
+			
 			SMG_show(value89);
 			rt_thread_delay(10);
 

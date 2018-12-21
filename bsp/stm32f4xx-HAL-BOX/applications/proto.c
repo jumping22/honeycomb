@@ -301,13 +301,13 @@ int Proto_sensor_cmd_deal(void)
 		
 		case TFTLCD: {
 		
-			Lcd_Clear(WHITE);
-			switch (data[0]){
-				case 1:LCD_draw_line(data[1],data[2],data[3],data[4],BLACK);break;
-				case 2:LCD_draw_rect(data[1],data[2],data[3],data[4],RED,data[5]);break;
-				case 3:LCD_draw_circle(data[1],data[2],data[3],BLACK);break;
+//			Lcd_Clear(WHITE);
+//			switch (data[0]){
+//				case 1:LCD_draw_line(data[1],data[2],data[3],data[4],BLACK);break;
+//				case 2:LCD_draw_rect(data[1],data[2],data[3],data[4],RED,data[5]);break;
+//				case 3:LCD_draw_circle(data[1],data[2],data[3],BLACK);break;
 				
-			}
+//			}
 
 			_data[0] = 0;
 			sendlength = 1;			
