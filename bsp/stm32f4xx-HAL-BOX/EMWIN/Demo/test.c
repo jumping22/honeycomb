@@ -249,7 +249,7 @@ void dwq_task(void) {
 	
 	if(flag == 0)
 	{
-			GUI_Init();
+			//GUI_Init();
 			GUI_AA_EnableHiRes();//允许抗锯齿功能
 			GUI_AA_SetFactor(MAG);//抗锯齿功能等级 4;
 	}
@@ -269,7 +269,7 @@ void Traffic_light(uint8_t a,uint8_t b,uint8_t c)
 	
 	if(traffic_flag == 0)
 	{
-		GUI_Init();
+		//GUI_Init();
 		GUI_SetBkColor(GUI_WHITE);  
 		GUI_Clear();
 		GUI_SetColor(GUI_BLUE);

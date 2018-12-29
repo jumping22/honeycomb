@@ -880,15 +880,31 @@ int main(void)
 		MX_SPI2_Init();//LCD spi初始化
 	  HAL_GPIO_WritePin(GPIOB,GPIO_PIN_12,GPIO_PIN_RESET);//LCD片选脚拉低
 	  Lcd_Init();//LCD初始化
-		Lcd_Clear(WHITE);//LCD清屏
+		Lcd_Clear(BLACK);//LCD清屏
 		LCD_show_image();//蓝宙logo显示
+		HAL_GPIO_WritePin(GPIOG,GPIO_PIN_4,GPIO_PIN_SET) ;
 		GD_init();//光电开关初始化
 		GZ_init();//滚珠开关初始化
-		
 		MQ_CON_init();//酒精控制管脚初始化
 		//HAL_GPIO_WritePin(GPIOF,GPIO_PIN_3,GPIO_PIN_SET);//酒精传感器电源控制端，在调度时使用
 		
-	
+			Init_DZP1();
+			Write_DZP1(1,0<<1);
+			Write_DZP1(2,0<<1);
+			Write_DZP1(3,0<<1);
+			Write_DZP1(4,0<<1);
+			Write_DZP1(5,0<<1);
+		
+			Init_MAX7219(); 
+			Write_Max7219(1, 0<<1);
+			Write_Max7219(2, 0<<1);
+			Write_Max7219(3, 0<<1);
+			Write_Max7219(4, 0<<1);
+			Write_Max7219(5, 0<<1);
+		
+		
+		HAL_Delay(3000);
+		GUI_Init();
 		proto_init();
 
 		rt_thread_idle_sethook(idle_hook_function);
@@ -909,7 +925,6 @@ int main(void)
 //max7219_test();
 	while(1)
 	{
-			
 			SMG_show(value89);
 			rt_thread_delay(10);
 

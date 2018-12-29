@@ -678,7 +678,7 @@ void GUI_deal(void)
 {
 	if(GUI_flag == 1)
 	{
-		GUI_Init();
+		//GUI_Init();
 		GUI_SetBkColor(GUI_BLACK); 
 		GUI_Clear();
 		GUI_flag = 0;

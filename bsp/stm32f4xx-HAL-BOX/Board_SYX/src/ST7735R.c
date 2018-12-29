@@ -118,7 +118,7 @@ void Lcd_Init(void)
 	HAL_Delay(20);
 	LCD_RST_SET;
 	HAL_Delay(20);
-	LCD_BL_SET;
+	//LCD_BL_SET;
 	
 //************* Start Initial Sequence **********// 
 Lcd_WriteIndex(0x36); 
